@@ -4,10 +4,10 @@
     "camera": true,
     "IMPORTED": {
         "v1": {
-          "PATH": "./vj/beeple/beeple00131.mp4",
+          "PATH": "./vj/beeple/beeple00172.mp4",
         },
         "v2": {
-          "PATH": "./vj/beeple/beeple00189.mp4",
+          "PATH": "./vj/beeple/beeple00199.mp4",
         },
     }
 }*/
@@ -27,17 +27,17 @@ float random(in vec2 p){
 }
 
 void main() {
-    float t = mod(time * 1.4, .8);
+    float t = mod(time * .4, .8);
     vec2 p = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
     vec2 uv = gl_FragCoord.xy / resolution;
     vec2 uv0 = uv;
     p *= .2;
     // uv = pow(uv. - .5, mod(time * .2, 1.9), 2.) + .5;
 
-    uv = rotate(uv, triNoise(uv, time * 2.2) * 2.);
+    // uv = rotate(uv, triNoise(uv, time * 2.2) * 2.);
     if (t < .5) {
         uv.x = fract(uv.x * 2.);
-uv = rotate(uv, time);
+        // uv = rotate(uv, time);
     }
     if (t > .3) {
         uv.y = fract(uv.y * sin(time * 2. ) * 1.8) + mod(time, .8);
@@ -45,6 +45,10 @@ uv = rotate(uv, time);
     // if (mod(time, .9) < .2) {
     //
     // }
+
+    uv = (uv - .5) * (uv - .3) * .8;
+
+    uv = fract(uv);
 
     p = sin(abs(p*p));
     // p = rotate(p, sin(time* 2.) + triNoise(uv, time) * 20.);
@@ -62,8 +66,8 @@ uv = rotate(uv, time);
     // gl_FragColor = fract(gl_FragColor * sin(time * .3) * 20.);
     //
 
-    if (t < .3) {
-        gl_FragColor.r = 1. - texture2D(backbuffer, fract(uv0 + random(vec2(time + uv0.y * .02)) * 20.)).b;
+    if (t < .7) {
+        gl_FragColor.r /= texture2D(backbuffer, fract(uv0 + random(vec2(time + uv0.y * .002)) * 20.)).b;
     }
-    gl_FragColor.r = texture2D(backbuffer, uv0 + .02).b;
+    // gl_FragColor.r = texture2D(backbuffer, uv0 + .02).b;
 }

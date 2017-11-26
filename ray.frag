@@ -1,18 +1,12 @@
 /*{
     "pixelRatio": 1,
     "glslify": true,
-//    "server": 3000,
-    // "IMPORTED": {
-    //   "v1": { "PATH": "./vj/tetsuya/tetsuya00070.mov" },
-    // },
     "IMPORTED": {
         "v1": {
           "PATH": "./vj/beeple/beeple00022.mp4",
-          // "SPEED": 0.5,
         },
         "v2": {
           "PATH": "./vj/beeple/beeple00172.mp4",
-          // "SPEED": 0.5,
         },
     }
 
@@ -95,8 +89,8 @@ void main (void) {
         float diff = clamp(dot(lightDir, normal), 0., 3.0);
         vec3 c = diff * light + ambient;
 
-        // gl_FragColor = vec4(c, 1.0) + texture2D(backbuffer) * .7;
-        // gl_FragColor *= noises(uv*.3) * 7. +.8　* (step(.2, mod(time*2., .4)) +.2);
+        gl_FragColor = vec4(c, 1.0) + texture2D(backbuffer) * .7;
+        gl_FragColor *= noises(uv*.3) * 7. +.8　* (step(.2, mod(time*2., .4)) +.2);
     }
     else {
         gl_FragColor = texture2D(v1, uv);
